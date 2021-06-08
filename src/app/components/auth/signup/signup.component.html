@@ -1,0 +1,48 @@
+<div class="container-sm">
+    <h2>Sign Up</h2>
+    <form (submit)="onSignup(signupForm)" #signupForm="ngForm">
+    
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter name"
+          required
+          name="name"
+          ngModel
+          #nameInput="ngModel"
+        />
+        <span *ngIf="nameInput.invalid">Please enter last name </span>
+      </div>
+      <div class="mb-3">
+        <label for="email1" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter Email"
+          required
+          email
+          name="email"
+          ngModel
+          #emailInput="ngModel"
+        />
+        <span *ngIf="emailInput.invalid">Please enter a valid email </span>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Enter Password"
+          required
+          name="password"
+          ngModel
+          #passwordInput="ngModel"
+        />
+        <span *ngIf="passwordInput.invalid">Please enter a valid password</span>
+      </div>
+      <button type="submit" class="btn btn-primary">Signup</button>
+    </form>
+  </div>
+  
