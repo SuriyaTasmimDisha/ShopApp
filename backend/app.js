@@ -29,8 +29,8 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 const user_authRouter = require("./routes/user_auth");
 const productRouter = require("./routes/products");
 const orderRouter = require("./routes/order");
-const generateProductRouter = require("./routes/generate_product");
-const uploadImageRouter = require("./routes/uploadImage");
+// const generateProductRouter = require("./routes/generate_product");
+// const uploadImageRouter = require("./routes/uploadImage");
 
 const app = express();
 
@@ -44,9 +44,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", user_authRouter);
 app.use("/products", productRouter);
 app.use("/orders", orderRouter);
-app.use("/products", generateProductRouter);
-app.use("/uploads", uploadImageRouter);
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+// app.use("/products", generateProductRouter);
+// app.use("/uploads", uploadImageRouter);
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.all("*", (req, res) => {
   res.status(404).json({

@@ -1,1 +1,73 @@
-<p>add-product works!</p>
+<div class="container-sm">
+  <h2>Add Plant</h2>
+  <form [formGroup]="form" (submit)="onAddProduct()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter name"
+        formControlName="name"
+      />
+      <span *ngIf="form.get('name')?.invalid">Please enter last name </span>
+    </div>
+    <div class="mb-3">
+      <label for="Category" class="form-label">Category</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Category"
+        formControlName="category"
+      />
+      <span *ngIf="form.get('name')?.invalid">Please enter a category </span>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Add Image</label>
+      <input class="form-control" type="file" (change)="onImageSelect($event)" />
+    </div>
+    <div class="mb-3 image-preview" *ngIf="imagePreview !== '' && imagePreview">
+        <img [src]="imagePreview" alt="form.value.name">
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Enter Price"
+        formControlName="price"
+      />
+      <span *ngIf="form.get('name')?.invalid">Please enter price</span>
+    </div>
+    <div class="mb-3">
+      <label for="count" class="form-label">Number of Product</label>
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Enter Number of Product"
+        formControlName="count"
+      />
+      <span *ngIf="form.get('name')?.invalid"
+        >Please enter number of the product</span
+      >
+    </div>
+    <div class="mb-3">
+      <label for="details" class="form-label">Details</label>
+      <textarea
+        class="form-control"
+        formControlName="details"
+        rows="5"
+      ></textarea>
+      <span *ngIf="form.get('name')?.invalid">Please enter details</span>
+    </div>
+    <div class="mb-3">
+      <label for="plantCare" class="form-label">Plant Care</label>
+      <textarea
+        class="form-control"
+        formControlName="plantCare"
+        rows="5"
+      ></textarea>
+      <span *ngIf="form.get('name')?.invalid">Please enter plant care</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+</div>
