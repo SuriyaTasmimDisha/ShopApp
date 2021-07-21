@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/product.model';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProductResponseModel } from 'src/app/models/product.model';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -8,20 +9,22 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
-  products: any[] = [];
-  private productSubs!: Subscription;
-
-  constructor(public productService: ProductService) {}
+export class HomeComponent implements OnInit {
+  products: ProductResponseModel[] = [];
+  constructor(private productService: ProductService, private router: Router, private cartService: CartService) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((products: any[]) => {
+    this.productService.getAllProducts().subscribe((products: ProductResponseModel[]) => {
       this.products = products;
       console.log(this.products);
-    })
+    });
   }
 
-  ngOnDestroy() {
-    this.productSubs.unsubscribe();
+  selectProduct(_id: string) {
+    this.router.navigate(['/product', _id]).then();
+  }
+
+  AddToCart(_id: string) {
+    this.cartService.addProductToCart(_id);
   }
 }

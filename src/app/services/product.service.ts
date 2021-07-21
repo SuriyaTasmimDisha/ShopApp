@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Product } from '../models/product.model';
+import { ProductModel, ProductResponseModel } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   private SERVER_URL = environment.SERVER_URL;
-  private products: Product[] = [];
-  private productUpdated = new Subject<Product[]>();
+  private products: ProductModel[] = [];
+  private productUpdated = new Subject<ProductModel[]>();
 
   constructor(private http: HttpClient) {}
 
@@ -43,7 +43,16 @@ export class ProductService {
     return this.productUpdated.asObservable();
   }
 
-  getProducts() {
-    return this.http.get(this.SERVER_URL + '/products');
+  getAllProducts(): Observable<ProductResponseModel> {
+    return this.http.get<ProductResponseModel>(this.SERVER_URL + '/products');
   }
+
+  getProduct(_id: string): Observable<ProductModel> {
+    return this.http.get<ProductModel>(this.SERVER_URL + '/products/' + _id);
+  }
+
+  getProductFromCategory(category: string): Observable<ProductModel> {
+    return this.http.get<ProductModel>(this.SERVER_URL + '/products/category' + category);
+  }
+
 }
